@@ -1,0 +1,24 @@
+Import Scanner
+
+Initialize total to 0
+Initialize max to the smallest possible floating-point number
+Initialize min to the largest possible floating-point number
+Initialize count to 0
+
+While count is less than 5
+    Prompt the user to enter a floating-point number
+    Read the number from the user
+    Add the number to total
+    If the number is greater than max, update max with the number
+    If the number is less than min, update min with the number
+    Increment count by 1
+End While
+
+Calculate average as total divided by 5
+Calculate interest as total multiplied by 0.20
+
+Print total
+Print average
+Print max
+Print min
+Print interest
