@@ -1,0 +1,42 @@
+Initialize an ArrayList 'days' with the days of the week.
+Initialize an ArrayList 'temperatures' with null values of the same size as 'days'.
+Initialize a Scanner to read user input.
+
+Start an infinite loop.
+    Display a menu with options to enter temperature, show temperature, show all temperatures and weekly average, and exit.
+    Read user's choice.
+
+    If the choice is "1":
+        Prompt the user to enter a day.
+        If the entered day is valid:
+            Prompt the user to enter the average temperature for that day.
+            Update the corresponding temperature in the 'temperatures' ArrayList.
+        Else, display an error message.
+
+    If the choice is "2":
+        Prompt the user to enter a day.
+        If the entered day is valid:
+            If the temperature for that day has been entered:
+                Display the temperature.
+            Else, display a message indicating that the temperature has not been entered yet.
+        Else, display an error message.
+
+    If the choice is "Week":
+        Initialize a total temperature counter and a count of entered temperatures.
+        For each day of the week:
+            If the temperature for that day has been entered:
+                Display the temperature.
+                Add the temperature to the total temperature counter.
+                Increment the count of entered temperatures.
+            Else, display a message indicating that no data is available for that day.
+
+        If any temperatures have been entered:
+            Calculate the weekly average temperature and display it.
+        Else, display a message indicating that no temperature data is available to calculate the weekly average.
+
+    If the choice is "Exit":
+        Display a message indicating that the program is exiting.
+        Break the loop.
+    If the choice is anything else, display an error message.
+
+Close the Scanner.
