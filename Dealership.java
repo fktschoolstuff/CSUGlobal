@@ -23,11 +23,11 @@ class Dealership {
 
     // Method to remove a vehicle
     public String removeVehicle(Automobile vehicle) {
-        try {
+        if (this.inventory.contains(vehicle)) {
             this.inventory.remove(vehicle);
             return "Vehicle removed successfully";
-        } catch (Exception e) {
-            return "Failed to remove vehicle: " + e.getMessage();
+        } else {
+            return "Vehicle not found in inventory";
         }
     }
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Crit5 {
@@ -42,8 +43,13 @@ public class Crit5 {
                 if (days.contains(day)) {
                     int index = days.indexOf(day);
                     System.out.print("Enter the average temperature for " + day + ": ");
-                    double temp = scanner.nextDouble();
-                    temperatures.set(index, temp);
+                    try {
+                        double temp = scanner.nextDouble();
+                        temperatures.set(index, temp);
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input. Please enter a numeric value for temperature.");
+                        scanner.next(); // Clear the invalid input
+                    }
                 } else {
                     System.out.println("Invalid day. Please try again.");
                 }

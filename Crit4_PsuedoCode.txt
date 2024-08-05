@@ -1,0 +1,50 @@
+BEGIN Crit4
+
+    // Main method
+    METHOD main()
+        // Create a Scanner object for user input
+        CREATE Scanner object
+
+        // Initialize variables to store total, maximum, minimum, and count of numbers
+        SET total TO 0
+        SET max TO Double.MIN_VALUE
+        SET min TO Double.MAX_VALUE
+        SET count TO 0
+
+        // Loop until we have read 5 numbers
+        WHILE count < 5 DO
+            // Prompt the user to enter a floating-point number
+            PRINT "Enter a floating-point number:"
+
+            // Read the number from the user
+            READ num
+
+            // Add the number to the total
+            total = total + num
+
+            // Update max and min if necessary
+            max = MAX(max, num)
+            min = MIN(min, num)
+
+            // Increment the count
+            count = count + 1
+        END WHILE
+
+        // Calculate the average of the numbers
+        SET average TO total / 5
+
+        // Calculate the interest on the total at 20%
+        SET interest TO total * 0.20
+
+        // Print the results
+        PRINT "Total: " + total
+        PRINT "Average: " + average
+        PRINT "Maximum: " + max
+        PRINT "Minimum: " + min
+        PRINT "Interest on total at 20%: " + interest
+
+        // Close the scanner to free up resources
+        CLOSE Scanner object
+    END METHOD
+
+END Crit4

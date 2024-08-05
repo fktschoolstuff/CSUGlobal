@@ -1,0 +1,33 @@
+CLASS Dealership
+    PRIVATE List<Automobile> inventory
+
+    // Constructor
+    METHOD Dealership()
+        SET inventory to new ArrayList
+    END METHOD
+
+    // Method to add a new vehicle
+    METHOD addVehicle(Automobile vehicle)
+        TRY
+            ADD vehicle to inventory
+            RETURN "Vehicle added successfully"
+        CATCH Exception e
+            RETURN "Failed to add vehicle: " + e.getMessage()
+        END TRY
+    END METHOD
+
+    // Method to remove a vehicle
+    METHOD removeVehicle(Automobile vehicle)
+        IF inventory contains vehicle THEN
+            REMOVE vehicle from inventory
+            RETURN "Vehicle removed successfully"
+        ELSE
+            RETURN "Vehicle not found in inventory"
+        END IF
+    END METHOD
+
+    // Method to list all vehicles
+    METHOD listVehicles()
+        RETURN inventory
+    END METHOD
+END CLASS

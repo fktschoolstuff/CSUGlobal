@@ -1,0 +1,42 @@
+CLASS Automobile
+    PRIVATE String make
+    PRIVATE String model
+    PRIVATE String color
+    PRIVATE int year
+    PRIVATE int mileage
+
+    // Default Constructor
+    METHOD Automobile()
+        SET make to ""
+        SET model to ""
+        SET color to ""
+        SET year to 0
+        SET mileage to 0
+    END METHOD
+
+    // Parameterized Constructor
+    METHOD Automobile(String make, String model, String color, int year, int mileage)
+        SET this.make to make
+        SET this.model to model
+        SET this.color to color
+        SET this.year to year
+        SET this.mileage to mileage
+    END METHOD
+
+    // Method to list vehicle information
+    METHOD listVehicleInfo()
+        RETURN array of make, model, color, year, mileage
+    END METHOD
+
+    // Override equals method for proper comparison in removeVehicle
+    METHOD equals(Object obj)
+        IF this == obj THEN
+            RETURN true
+        END IF
+        IF obj is null OR getClass() != obj.getClass() THEN
+            RETURN false
+        END IF
+        Automobile that = (Automobile) obj
+        RETURN year == that.year AND mileage == that.mileage AND make.equals(that.make) AND model.equals(that.model) AND color.equals(that.color)
+    END METHOD
+END CLASS

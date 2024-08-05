@@ -1,0 +1,103 @@
+BEGIN Crit5
+
+    // Main method
+    METHOD main()
+        // Create ArrayLists to store days and temperatures
+        CREATE ArrayList days
+        CREATE ArrayList temperatures
+
+        // Add days of the week to the days ArrayList
+        ADD "Monday" to days
+        ADD "Tuesday" to days
+        ADD "Wednesday" to days
+        ADD "Thursday" to days
+        ADD "Friday" to days
+        ADD "Saturday" to days
+        ADD "Sunday" to days
+
+        // Initialize temperatures with null values to indicate no data entered
+        FOR i FROM 0 TO size of days - 1 DO
+            ADD null to temperatures
+        END FOR
+
+        // Scanner for user input
+        CREATE Scanner object
+        DECLARE input as String
+
+        WHILE true DO
+            // Display menu
+            PRINT "Menu:"
+            PRINT "1. Enter temperature for a specific day"
+            PRINT "2. Show temperature for a specific day"
+            PRINT "Week - Show all temperatures and weekly average"
+            PRINT "Exit"
+            PRINT "Enter your choice: "
+            READ input
+
+            IF input EQUALS "1" THEN
+                // Enter temperature for a specific day - Must be case sensitive
+                PRINT "Enter the day (e.g., Monday): "
+                READ day
+                IF days CONTAINS day THEN
+                    SET index TO index of day in days
+                    PRINT "Enter the average temperature for " + day + ": "
+                    TRY
+                        READ temp
+                        SET temperatures[index] TO temp
+                    CATCH InputMismatchException
+                        PRINT "Invalid input. Please enter a numeric value for temperature."
+                        CLEAR invalid input
+                    END TRY
+                ELSE
+                    PRINT "Invalid day. Please try again."
+                END IF
+            ELSE IF input EQUALS "2" THEN
+                // Show temperature for a specific day - Must be case sensitive
+                PRINT "Enter the day (e.g., Monday): "
+                READ day
+                IF days CONTAINS day THEN
+                    SET index TO index of day in days
+                    SET temp TO temperatures[index]
+                    IF temp IS NOT null THEN
+                        PRINT day + ": " + temp + "°C"
+                    ELSE
+                        PRINT "Temperature for " + day + " has not been entered yet."
+                    END IF
+                ELSE
+                    PRINT "Invalid day. Please try again."
+                END IF
+            ELSE IF input EQUALS "Week" IGNORE CASE THEN
+                // Show all temperatures and weekly average
+                SET totalTemperature TO 0.0
+                SET count TO 0
+                PRINT "Temperatures for the week:"
+                FOR i FROM 0 TO size of days - 1 DO
+                    SET temp TO temperatures[i]
+                    IF temp IS NOT null THEN
+                        PRINT days[i] + ": " + temp + "°C"
+                        ADD temp TO totalTemperature
+                        INCREMENT count
+                    ELSE
+                        PRINT days[i] + ": No data"
+                    END IF
+                END FOR
+                IF count > 0 THEN
+                    SET weeklyAverage TO totalTemperature / count
+                    PRINT "Weekly Average Temperature: " + weeklyAverage + "°C"
+                ELSE
+                    PRINT "No temperature data available to calculate the weekly average."
+                END IF
+            ELSE IF input EQUALS "Exit" IGNORE CASE THEN
+                // Exit the program
+                PRINT "Exiting the program."
+                BREAK
+            ELSE
+                PRINT "Invalid choice. Please try again."
+            END IF
+        END WHILE
+
+        // Close the scanner
+        CLOSE Scanner object
+    END METHOD
+
+END Crit5

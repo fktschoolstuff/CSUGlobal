@@ -29,4 +29,17 @@ class Automobile {
     public String[] listVehicleInfo() {
         return new String[] {this.make, this.model, this.color, String.valueOf(this.year), String.valueOf(this.mileage)};
     }
+
+    // Override equals method for proper comparison in removeVehicle
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Automobile that = (Automobile) obj;
+        return year == that.year &&
+               mileage == that.mileage &&
+               make.equals(that.make) &&
+               model.equals(that.model) &&
+               color.equals(that.color);
+    }
 }

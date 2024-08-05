@@ -5,7 +5,7 @@ public class Crit4 {
         // Create a Scanner object for user input
         Scanner scanner = new Scanner(System.in);
 
-        // Initialize variables
+        // Initialize variables to store total, maximum, minimum, and count of numbers
         double total = 0;
         double max = Double.MIN_VALUE;
         double min = Double.MAX_VALUE;
@@ -13,7 +13,7 @@ public class Crit4 {
 
         // Loop until we have read 5 numbers
         while (count < 5) {
-            // Prompt the user to enter a number
+            // Prompt the user to enter a floating-point number
             System.out.println("Enter a floating-point number:");
             
             // Read the number from the user
@@ -30,8 +30,10 @@ public class Crit4 {
             count++;
         }
 
-        // Calculate the average and interest
+        // Calculate the average of the numbers
         double average = total / 5;
+
+        // Calculate the interest on the total at 20%
         double interest = total * 0.20;
 
         // Print the results
@@ -40,5 +42,8 @@ public class Crit4 {
         System.out.println("Maximum: " + max);
         System.out.println("Minimum: " + min);
         System.out.println("Interest on total at 20%: " + interest);
+
+        // Close the scanner to free up resources
+        scanner.close();
     }
 }

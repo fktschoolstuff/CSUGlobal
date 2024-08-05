@@ -1,0 +1,107 @@
+BEGIN AutomobileInventory
+
+    // Initialize dealership and scanner
+    CREATE Dealership object
+    CREATE Scanner object
+
+    WHILE true
+        TRY
+            // Display menu options
+            PRINT "Enter 1 to add a vehicle"
+            PRINT "Enter 2 to remove a vehicle from index starting from 0"
+            PRINT "Enter 3 to list all vehicles"
+            PRINT "Enter 4 to update a vehicle from index starting from 0"
+            PRINT "Enter 5 to print and quit:"
+            READ user choice
+
+            IF choice == 1 THEN
+                // Add a new vehicle
+                PRINT "Enter the make, model, color, year, and mileage of the vehicle (separated by spaces):"
+                READ make, model, color, year, mileage
+                CREATE Automobile object with make, model, color, year, mileage
+                CALL dealership.addVehicle(auto)
+                PRINT result of addVehicle
+
+            ELSE IF choice == 2 THEN
+                // Remove a vehicle
+                PRINT "Enter the index of the vehicle to remove:"
+                READ index
+                IF index is invalid THEN
+                    PRINT "Invalid index"
+                ELSE
+                    CALL dealership.removeVehicle(vehicle at index)
+                    PRINT result of removeVehicle
+
+            ELSE IF choice == 3 THEN
+                // List all vehicles
+                FOR each vehicle in dealership.listVehicles()
+                    FOR each info in vehicle.listVehicleInfo()
+                        PRINT info
+                    END FOR
+                    PRINT empty line
+                END FOR
+
+            ELSE IF choice == 4 THEN
+                // Update a vehicle
+                PRINT "Enter the index of the vehicle to update:"
+                READ index
+                IF index is invalid THEN
+                    PRINT "Invalid index"
+                ELSE
+                    PRINT "Enter the new make, model, color, year, and mileage of the vehicle (separated by spaces):"
+                    READ make, model, color, year, mileage
+                    CREATE Automobile object with make, model, color, year, mileage
+                    CALL dealership.removeVehicle(vehicle at index)
+                    CALL dealership.addVehicle(auto)
+                    PRINT result of addVehicle
+                END IF
+
+            ELSE IF choice == 5 THEN
+                // Ask if the user wants to print the information to a file
+                PRINT "Do you want to print the information to a file? (Y/N):"
+                READ response
+                IF response == "Y" THEN
+                    CALL printToFile(dealership)
+                ELSE
+                    PRINT "A file will not be printed."
+                END IF
+                BREAK
+
+            ELSE
+                PRINT "Invalid choice"
+            END IF
+
+        CATCH Exception e
+            PRINT "An error occurred: " + e.getMessage()
+            READ and discard invalid input
+        END TRY
+    END WHILE
+
+    CLOSE scanner
+
+END AutomobileInventory
+
+// Method to print the information to a file
+FUNCTION printToFile(dealership)
+    DEFINE directoryPath = "C:\\Temp"
+    DEFINE filePath = directoryPath + "\\Autos.txt"
+
+    // Create the directory if it doesn't exist
+    IF directory does not exist THEN
+        CREATE directory
+    END IF
+
+    // Write to the file
+    TRY
+        OPEN FileWriter with filePath
+        FOR each vehicle in dealership.listVehicles()
+            FOR each info in vehicle.listVehicleInfo()
+                WRITE info to file
+            END FOR
+            WRITE empty line to file
+        END FOR
+        PRINT "Information has been printed to " + filePath
+    CATCH IOException e
+        PRINT "An error occurred while writing to the file: " + e.getMessage()
+    END TRY
+END FUNCTION
